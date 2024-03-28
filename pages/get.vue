@@ -11,7 +11,7 @@
 <script>
 export default {
   data: () => ({
-    url: "http://localhost:4003/v1/third_party/CRAFT",
+    url: "http://localhost:4003/v1/third_party/",
     data: [],
   }),
     async created() {

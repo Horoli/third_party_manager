@@ -45,14 +45,18 @@
         class="preview-image"
       />
     </v-container>
+
+    <v-container>
+      <button @click="PostThirdParty"> post </button>
+    </v-container>
   </div>
 </template>
 
 <script>
 export default {
   data: () => ({
-    getTagUrl: "http://localhost:4003/v1/tag/0",
-    postThirdPartyUrl: "http://localhost:4003/v1/third_party/CRAFT",
+    getTagUrl: "http://localhost:4003/v1/tag/",
+    postThirdPartyUrl: "http://localhost:4003/v1/third_party/",
 
     statusCode: null,
     getTags: [],
@@ -83,6 +87,23 @@ export default {
         return tag.label;
       });
       return filteredTags;
+    },
+
+    async PostThirdParty(){
+      const postData = await $fetch(this.postThirdPartyUrl, {
+        method:'POST',
+        body:{
+          type:this.type,
+          label: this.label,
+          mainUrl: this.mainUrl,
+          mainDescription: this.mainDescription,
+          subDescription: this.subDescription,
+          thumbnail: this.base64Image,
+          tags:this.selectedTags,
+        }
+      })
+
+      return postData;
     },
 
     onImageChange(event) {
