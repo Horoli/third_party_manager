@@ -2,7 +2,12 @@
   <div>
     <v-container>
       <label for="type"> type : </label>
-      <input type="text" id="type" v-model="type" />
+      <!-- <input type="text" id="type" v-model="type" /> -->
+      <v-select
+        id="tags"
+        v-model="selectedType"
+        :items="['PathOfExile','WorldOfWarcraft']"
+      ></v-select>
     </v-container>
 
     <v-container>
@@ -57,7 +62,7 @@ export default {
   data: () => ({
     getTagUrl: "http://localhost:4003/v1/tag/",
     postThirdPartyUrl: "http://localhost:4003/v1/third_party/",
-
+    selectedType:'PathOfExile',
     statusCode: null,
     getTags: [],
     type: "",
@@ -93,7 +98,7 @@ export default {
       const postData = await $fetch(this.postThirdPartyUrl, {
         method:'POST',
         body:{
-          type:this.type,
+          type:this.selectedType,
           label: this.label,
           mainUrl: this.mainUrl,
           mainDescription: this.mainDescription,
