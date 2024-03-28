@@ -1,49 +1,51 @@
 <template>
-  <v-container>
-    <label for="type"> type : </label>
-    <input type="text" id="type" v-model="type" />
-  </v-container>
+  <div>
+    <v-container>
+      <label for="type"> type : </label>
+      <input type="text" id="type" v-model="type" />
+    </v-container>
 
-  <v-container>
-    <label for="label"> label : </label>
-    <input type="text" id="label" v-model="label" />
-  </v-container>
+    <v-container>
+      <label for="label"> label : </label>
+      <input type="text" id="label" v-model="label" />
+    </v-container>
 
-  <v-container>
-    <label for="mainDescription"> mainDescription : </label>
-    <input type="text" id="mainDescription" v-model="mainDescription" />
-  </v-container>
+    <v-container>
+      <label for="mainDescription"> mainDescription : </label>
+      <input type="text" id="mainDescription" v-model="mainDescription" />
+    </v-container>
 
-  <v-container>
-    <label for="subDescription"> subDescription : </label>
-    <input type="text" id="subDescription" v-model="subDescription" />
-  </v-container>
+    <v-container>
+      <label for="subDescription"> subDescription : </label>
+      <input type="text" id="subDescription" v-model="subDescription" />
+    </v-container>
 
-  <v-container>
-    <label for="mainUrl"> mainUrl : </label>
-    <input type="text" id="mainUrl" v-model="mainUrl" />
-  </v-container>
+    <v-container>
+      <label for="mainUrl"> mainUrl : </label>
+      <input type="text" id="mainUrl" v-model="mainUrl" />
+    </v-container>
 
-  <v-container>
-    <label for="tags"> tags </label>
-    <v-select
-      id="tags"
-      v-model="selectedTags"
-      :items="getTags"
-      multiple
-    ></v-select>
-  </v-container>
+    <v-container>
+      <label for="tags"> tags </label>
+      <v-select
+        id="tags"
+        v-model="selectedTags"
+        :items="getTags"
+        multiple
+      ></v-select>
+    </v-container>
 
-  <v-container>
-    <label for="image"> image </label>
-    <input type="file" id="image" accept="image/*" @change="onImageChange" />
-    <img
-      :src="imagePreview"
-      alt="Image preview"
-      v-if="imagePreview"
-      class="preview-image"
-    />
-  </v-container>
+    <v-container>
+      <label for="image"> image </label>
+      <input type="file" id="image" accept="image/*" @change="onImageChange" />
+      <img
+        :src="imagePreview"
+        alt="Image preview"
+        v-if="imagePreview"
+        class="preview-image"
+      />
+    </v-container>
+  </div>
 </template>
 
 <script>

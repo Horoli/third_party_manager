@@ -14,9 +14,10 @@ export default {
     url: "http://localhost:4003/v1/third_party/CRAFT",
     data: [],
   }),
-  async created() {},
-  async mounted() {
+    async created() {
     this.data = await this.fetchData();
+  },
+  async mounted() {
   },
   methods: {
     async fetchData() {
