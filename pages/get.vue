@@ -2,7 +2,8 @@
   <div>
     <li v-for="(value, key) in data" :key="key" class="noneMarkerList">
         <li v-for="thirdParty in value">
-            <li v-for="(v , k) in thirdParty"> {{ k }} : {{ v }}</li>
+          {{ thirdParty }}
+            <!-- <li v-for="(v , k) in thirdParty"> {{ k }} : {{ v }}</li> -->
         </li>
     </li>
   </div>
@@ -11,7 +12,7 @@
 <script>
 export default {
   data: () => ({
-    url: "http://localhost:4003/v1/third_party/",
+    url: "https://thirdparty-api.horoli.kr/v1/third_party/",
     data: [],
   }),
     async created() {

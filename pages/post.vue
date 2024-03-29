@@ -65,8 +65,8 @@
 <script>
 export default {
   data: () => ({
-    getTagUrl: "http://localhost:4003/v1/tag/",
-    postThirdPartyUrl: "http://localhost:4003/v1/third_party/",
+    getTagUrl: "https://thirdparty-api.horoli.kr/v1/tag/",
+    postThirdPartyUrl: "https://thirdparty-api.horoli.kr/v1/third_party/",
     selectedType:'PathOfExile',
     statusCode: null,
     getTags: [],
