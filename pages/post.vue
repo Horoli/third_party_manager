@@ -70,6 +70,8 @@ export default {
     selectedType:'PathOfExile',
     statusCode: null,
     getTags: [],
+
+
     type: "",
     label: "",
     mainDescription: "",
@@ -114,6 +116,15 @@ export default {
           tags:this.selectedTags,
         }
       })
+
+      // this.selectedType = "";
+      this.label = "";
+      this.mainUrl = "";
+      this.mainDescription = "";
+      this.subDescription = "";
+      this.thumbnail = "";
+      this.selectedTags = [];
+      this.imagePreview = ""
 
       return postData;
     },
