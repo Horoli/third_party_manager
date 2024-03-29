@@ -31,6 +31,11 @@
     </v-container>
 
     <v-container>
+      <label for="manualUrl"> manualUrl : </label>
+      <input type="text" id="manualUrl" v-model="manualUrl" />
+    </v-container>
+
+    <v-container>
       <label for="tags"> tags </label>
       <v-select
         id="tags"
@@ -70,6 +75,7 @@ export default {
     mainDescription: "",
     subDescription: "",
     mainUrl: "",
+    manualUrl:"",
     selectedTags: [],
     base64Image: null,
 
@@ -101,6 +107,7 @@ export default {
           type:this.selectedType,
           label: this.label,
           mainUrl: this.mainUrl,
+          manualUrl: this.manualUrl,
           mainDescription: this.mainDescription,
           subDescription: this.subDescription,
           thumbnail: this.base64Image,
