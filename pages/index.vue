@@ -6,8 +6,7 @@
   </div>
 </template>
 
-<script setup lang="js"></script>
-
+<script></script>
 <style scoped>
 /* body {
   font-family: "Arial";
