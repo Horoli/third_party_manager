@@ -148,6 +148,7 @@ export default {
       const postData = await $fetch(this.postThirdPartyUrl, {
         method:'POST',
         body:{
+          token:this.token,
           type:this.selectedType,
           label: this.label,
           mainUrl: this.mainUrl,
