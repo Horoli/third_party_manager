@@ -1,5 +1,25 @@
 <template>
   <div>
+
+    <v-container>
+      <label for="id"> id : </label>
+      <input type="text" id="id" v-model="id" />
+    </v-container>
+
+    <v-container>
+      <label for="password"> password : </label>
+      <input type="password" id="password" v-model="password" />
+    </v-container>
+
+    <v-container>
+      <button @click="PostManagerLogin"> loginButton </button>
+    </v-container>
+
+
+    <v-container>
+      <label for="id"> getToken :  {{ token }}</label>
+    </v-container>
+
     <v-container>
       <label for="type"> type : </label>
       <!-- <input type="text" id="type" v-model="type" /> -->
@@ -67,9 +87,15 @@ export default {
   data: () => ({
     getTagUrl: "https://thirdparty-api.horoli.kr/v1/tag/",
     postThirdPartyUrl: "https://thirdparty-api.horoli.kr/v1/third_party/",
+    postMangerSignInUrl : "http://localhost:2017/v1/manager/sign_in",
+
     selectedType:'PathOfExile',
     statusCode: null,
     getTags: [],
+
+    id: "",
+    password:"",
+    token:"",
 
 
     type: "",
@@ -87,6 +113,22 @@ export default {
     this.getTags = await this.fetchTags();
   },
   methods: {
+
+    async PostManagerLogin(){
+        const postData = await $fetch(
+            this.postMangerSignInUrl,{
+                method:'POST',
+                body:{
+                    id: this.id,
+                    password : this.password,
+                }
+            },
+        )
+
+        this.token = postData.data.token;
+
+        return postData;
+    },
     async fetchTags() {
       const response = await fetch(this.getTagUrl, {
         method: "GET",

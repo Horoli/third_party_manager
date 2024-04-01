@@ -1,5 +1,26 @@
 <template>
     <div>
+
+    <v-container>
+      <label for="id"> id : </label>
+      <input type="text" id="id" v-model="id" />
+    </v-container>
+
+    <v-container>
+      <label for="password"> password : </label>
+      <input type="password" id="password" v-model="password" />
+    </v-container>
+
+    <v-container>
+      <button @click="PostManagerLogin"> loginButton </button>
+    </v-container>
+
+
+    <v-container>
+      <label for="id"> getToken :  {{ token }}</label>
+    </v-container>
+
+
     <v-container>
       <label for="type"> type : </label>
       <!-- <input type="text" id="type" v-model="type" /> -->
@@ -16,7 +37,7 @@
     </v-container>
 
     <v-container>
-      <button @click="PostTag"> post </button>
+      <button @click="PostTag"> postButton </button>
     </v-container>
     </div>
 </template>
@@ -25,8 +46,14 @@
 export default{
   data:()=>({
     postTagUrl : "https://thirdparty-api.horoli.kr/v1/tag/",
+    postMangerSignInUrl : "http://localhost:2017/v1/manager/sign_in",
     selectedType:'PathOfExile',
     statusCode : null,
+
+    id: "",
+    password:"",
+    token:"",
+    
     
     label: "",
 
@@ -36,11 +63,27 @@ export default{
 
   },
   methods:{
+    async PostManagerLogin(){
+        const postData = await $fetch(
+            this.postMangerSignInUrl,{
+                method:'POST',
+                body:{
+                    id: this.id,
+                    password : this.password,
+                }
+            },
+        )
+
+        this.token = postData.data.token;
+
+        return postData;
+    },
     async PostTag(){
         const postData = await $fetch(
             this.postTagUrl,{
                 method:'POST',
                 body:{
+                    token: this.token,
                     type:this.selectedType,
                     label:this.label,
                 }
@@ -49,7 +92,6 @@ export default{
 
         this.selectedType = 'PathOfExile'
         this.label = "";
-
 
         return postData;
     }
