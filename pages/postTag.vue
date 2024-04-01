@@ -46,7 +46,7 @@
 export default{
   data:()=>({
     postTagUrl : "https://thirdparty-api.horoli.kr/v1/tag/",
-    postMangerSignInUrl : "http://localhost:2017/v1/manager/sign_in",
+    postMangerSignInUrl : "https://thirdparty-api.horoli.kr/v1/manager/sign_in",
     selectedType:'PathOfExile',
     statusCode : null,
 
