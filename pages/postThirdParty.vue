@@ -1,6 +1,5 @@
 <template>
   <div>
-
     <v-container>
       <label for="id"> id : </label>
       <input type="text" id="id" v-model="id" />
@@ -12,12 +11,11 @@
     </v-container>
 
     <v-container>
-      <button @click="PostManagerLogin"> loginButton </button>
+      <button @click="PostManagerLogin">loginButton</button>
     </v-container>
 
-
     <v-container>
-      <label for="id"> getToken :  {{ token }}</label>
+      <label for="id"> getToken : {{ token }}</label>
     </v-container>
 
     <v-container>
@@ -26,7 +24,7 @@
       <v-select
         id="tags"
         v-model="selectedType"
-        :items="['PathOfExile','WorldOfWarcraft']"
+        :items="['PathOfExile', 'WorldOfWarcraft']"
       ></v-select>
     </v-container>
 
@@ -77,7 +75,7 @@
     </v-container>
 
     <v-container>
-      <button @click="PostThirdParty"> post </button>
+      <button @click="PostThirdParty">post</button>
     </v-container>
   </div>
 </template>
@@ -87,23 +85,22 @@ export default {
   data: () => ({
     getTagUrl: "https://thirdparty-api.horoli.kr/v1/tag/",
     postThirdPartyUrl: "https://thirdparty-api.horoli.kr/v1/third_party/",
-    postMangerSignInUrl : "https://thirdparty-api.horoli.kr/v1/manager/sign_in",
+    postMangerSignInUrl: "https://thirdparty-api.horoli.kr/v1/manager/sign_in",
 
-    selectedType:'PathOfExile',
+    selectedType: "PathOfExile",
     statusCode: null,
     getTags: [],
 
     id: "",
-    password:"",
-    token:"",
-
+    password: "",
+    token: "",
 
     type: "",
     label: "",
     mainDescription: "",
     subDescription: "",
     mainUrl: "",
-    manualUrl:"",
+    manualUrl: "",
     selectedTags: [],
     base64Image: null,
 
@@ -113,21 +110,18 @@ export default {
     this.getTags = await this.fetchTags();
   },
   methods: {
+    async PostManagerLogin() {
+      const postData = await $fetch(this.postMangerSignInUrl, {
+        method: "POST",
+        body: {
+          id: this.id,
+          password: this.password,
+        },
+      });
 
-    async PostManagerLogin(){
-        const postData = await $fetch(
-            this.postMangerSignInUrl,{
-                method:'POST',
-                body:{
-                    id: this.id,
-                    password : this.password,
-                }
-            },
-        )
+      this.token = postData.data.token;
 
-        this.token = postData.data.token;
-
-        return postData;
+      return postData;
     },
     async fetchTags() {
       const response = await fetch(this.getTagUrl, {
@@ -144,21 +138,21 @@ export default {
       return filteredTags;
     },
 
-    async PostThirdParty(){
+    async PostThirdParty() {
       const postData = await $fetch(this.postThirdPartyUrl, {
-        method:'POST',
-        body:{
-          token:this.token,
-          type:this.selectedType,
+        method: "POST",
+        body: {
+          token: this.token,
+          type: this.selectedType,
           label: this.label,
           mainUrl: this.mainUrl,
           manualUrl: this.manualUrl,
           mainDescription: this.mainDescription,
           subDescription: this.subDescription,
           thumbnail: this.base64Image,
-          tags:this.selectedTags,
-        }
-      })
+          tags: this.selectedTags,
+        },
+      });
 
       // this.selectedType = "";
       this.label = "";
@@ -167,7 +161,7 @@ export default {
       this.subDescription = "";
       this.thumbnail = "";
       this.selectedTags = [];
-      this.imagePreview = ""
+      this.imagePreview = "";
 
       return postData;
     },

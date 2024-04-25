@@ -1,9 +1,13 @@
 <template>
   <div>
-    <li v-for="(value, key) in data" :key="key" class="noneMarkerList">
-        <li v-for="thirdParty in value">
-          {{ thirdParty }}
-            <!-- <li v-for="(v , k) in thirdParty"> {{ k }} : {{ v }}</li> -->
+    aaa
+  </div>
+  <div>
+    <li v-for="(value, key) in data" :key="key" class="noneMarkerList" >
+        <li v-for="(thirdParty, key) in value">
+          <button>
+            {{ key }} : {{ thirdParty }}
+          </button>
         </li>
     </li>
   </div>
@@ -37,8 +41,12 @@ export default {
 </script>
 
 <style scoped>
+
+
 .noneMarkerList {
   list-style: none;
+  border: 1px solid #3e3e3e;
+  margin: 10px;
 }
 
 .preview-image {

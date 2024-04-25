@@ -1,16 +1,15 @@
 <template>
-    <div>
-        {{ getTags }}
-    </div>
+  <div>
+    {{ getTags }}
+  </div>
 </template>
 
 <script>
 export default {
-  data:()=>({
-    getTagUrl: "https://thirdparty-api.horoli.kr/v1/tag/",
-
-    getTags :[],
-
+  data: () => ({
+    // getTagUrl: "https://thirdparty-api.horoli.kr/v1/tag/",
+    getTagUrl: "http://localhost:2017/v1/tag/",
+    getTags: [],
   }),
   async mounted() {
     this.getTags = await this.fetchTags();
@@ -30,7 +29,6 @@ export default {
       });
       return filteredTags;
     },
-}
-}
-
+  },
+};
 </script>
