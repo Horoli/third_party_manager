@@ -8,6 +8,7 @@
         <li><NuxtLink to="/postTag">postTag</NuxtLink></li>
         <li><NuxtLink to="/getThirdParty">getThirdParty</NuxtLink></li>
         <li><NuxtLink to="/postThirdParty">postThirdParty</NuxtLink></li>
+        <li><NuxtLink to="/postLeague">postLeague</NuxtLink></li>
       </ul>
     </nav>
   </header>
