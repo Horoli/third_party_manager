@@ -33,7 +33,7 @@
       </v-select>
     </v-container>
 
-    <v-container>
+    <!-- <v-container>
       <label for="image"> image </label>
       <input type="file" id="image" accept="image/*" @change="onImageChange" />
       <img
@@ -42,7 +42,7 @@
         v-if="imagePreview"
         class="preview-image"
       />
-    </v-container>
+    </v-container> -->
 
     <v-container>
       <label for="start">Start:</label>
@@ -74,8 +74,8 @@ export default {
     label : "",
     officialApi: "",
     version : "",
-    base64Image: null,
-    imagePreview: null,
+    // base64Image: null,
+    // imagePreview: null,
     start :"",
     end:"",
     endStates:['predict', 'confirmed'],
@@ -105,7 +105,7 @@ export default {
       const postData = await $fetch(this.postLeagueUrl, {
         method: "POST",
         body: {
-          // token: this.token,
+          token: this.token,
           // type: this.selectedType,
           label: this.label,
           version: this.version,
@@ -131,22 +131,22 @@ export default {
     },
 
 
-    onImageChange(event) {
-      const file = event.target.files[0];
-      if (file) {
-        const reader = new FileReader();
-        reader.onload = (e) => {
-          this.imagePreview = e.target.result;
-        };
-        reader.readAsDataURL(file);
+    // onImageChange(event) {
+    //   const file = event.target.files[0];
+    //   if (file) {
+    //     const reader = new FileReader();
+    //     reader.onload = (e) => {
+    //       this.imagePreview = e.target.result;
+    //     };
+    //     reader.readAsDataURL(file);
 
-        const readerForBase64 = new FileReader();
-        readerForBase64.onload = (e) => {
-          this.base64Image = e.target.result.split(",")[1];
-        };
-        readerForBase64.readAsDataURL(file);
-      }
-    },
+    //     const readerForBase64 = new FileReader();
+    //     readerForBase64.onload = (e) => {
+    //       this.base64Image = e.target.result.split(",")[1];
+    //     };
+    //     readerForBase64.readAsDataURL(file);
+    //   }
+    // },
 
   }
 }
