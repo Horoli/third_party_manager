@@ -3,18 +3,9 @@
     <v-container>
       <label for="id"> id : </label>
       <input type="text" id="id" v-model="id" />
-    </v-container>
-
-    <v-container>
       <label for="password"> password : </label>
       <input type="password" id="password" v-model="password" />
-    </v-container>
-
-    <v-container>
       <button @click="PostManagerLogin">loginButton</button>
-    </v-container>
-
-    <v-container>
       <label for="id"> getToken : {{ token }}</label>
     </v-container>
 
