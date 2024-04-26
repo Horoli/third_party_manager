@@ -5,27 +5,9 @@
         <button @click="selectTag(tag)">{{ tag }}</button>
       </div>
     </v-container>
-    <v-container>
-      <label for="id"> id : </label>
-      <input type="text" id="id" v-model="id" />
-    </v-container>
-
-    <v-container>
-      <label for="password"> password : </label>
-      <input type="password" id="password" v-model="password" />
-    </v-container>
-
-    <v-container>
-      <button @click="PostManagerLogin">loginButton</button>
-    </v-container>
-
-    <v-container>
-      <label for="id"> getToken : {{ token }}</label>
-    </v-container>
 
     <v-container>
       <label for="type"> type : </label>
-      <!-- <input type="text" id="type" v-model="type" /> -->
       <v-select
         id="tags"
         v-model="selectedType"
@@ -49,22 +31,15 @@ export default {
   data: () => ({
     getTags: [],
     getTagUrl: "https://thirdparty-api.horoli.kr/v1/tag/",
-    //
-
     postTagUrl: "https://thirdparty-api.horoli.kr/v1/tag/",
-    postMangerSignInUrl: "https://thirdparty-api.horoli.kr/v1/manager/sign_in",
     selectedType: "PathOfExile",
     statusCode: null,
-
-    id: "",
-    password: "",
-    token: "",
-
     label: "",
   }),
   async mounted() {
     this.getTags = await this.fetchTags();
   },
+  inject: ["managerToken"],
   methods: {
     selectTag(tag) {
       this.label = tag;
@@ -83,24 +58,11 @@ export default {
       });
       return filteredTags;
     },
-    async PostManagerLogin() {
-      const postData = await $fetch(this.postMangerSignInUrl, {
-        method: "POST",
-        body: {
-          id: this.id,
-          password: this.password,
-        },
-      });
-
-      this.token = postData.data.token;
-
-      return postData;
-    },
     async PostTag() {
       const postData = await $fetch(this.postTagUrl, {
         method: "POST",
         body: {
-          token: this.token,
+          token: this.managerToken.value,
           type: this.selectedType,
           label: this.label,
         },

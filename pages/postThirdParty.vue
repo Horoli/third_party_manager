@@ -1,17 +1,7 @@
 <template>
   <div>
     <v-container>
-      <label for="id"> id : </label>
-      <input type="text" id="id" v-model="id" />
-      <label for="password"> password : </label>
-      <input type="password" id="password" v-model="password" />
-      <button @click="PostManagerLogin">loginButton</button>
-      <label for="id"> getToken : {{ token }}</label>
-    </v-container>
-
-    <v-container>
       <label for="type"> type : </label>
-      <!-- <input type="text" id="type" v-model="type" /> -->
       <v-select
         id="tags"
         v-model="selectedType"
@@ -76,15 +66,11 @@ export default {
   data: () => ({
     getTagUrl: "https://thirdparty-api.horoli.kr/v1/tag/",
     postThirdPartyUrl: "https://thirdparty-api.horoli.kr/v1/third_party/",
-    postMangerSignInUrl: "https://thirdparty-api.horoli.kr/v1/manager/sign_in",
+    // postThirdPartyUrl: "http://localhost:2017/v1/third_party/",
 
     selectedType: "PathOfExile",
     statusCode: null,
     getTags: [],
-
-    id: "",
-    password: "",
-    token: "",
 
     type: "",
     label: "",
@@ -100,20 +86,8 @@ export default {
   async mounted() {
     this.getTags = await this.fetchTags();
   },
+  inject: ["managerToken"],
   methods: {
-    async PostManagerLogin() {
-      const postData = await $fetch(this.postMangerSignInUrl, {
-        method: "POST",
-        body: {
-          id: this.id,
-          password: this.password,
-        },
-      });
-
-      this.token = postData.data.token;
-
-      return postData;
-    },
     async fetchTags() {
       const response = await fetch(this.getTagUrl, {
         method: "GET",
@@ -133,7 +107,7 @@ export default {
       const postData = await $fetch(this.postThirdPartyUrl, {
         method: "POST",
         body: {
-          token: this.token,
+          token: this.managerToken.value,
           type: this.selectedType,
           label: this.label,
           mainUrl: this.mainUrl,
@@ -145,9 +119,9 @@ export default {
         },
       });
 
-      // this.selectedType = "";
       this.label = "";
       this.mainUrl = "";
+      this.manualUrl = "";
       this.mainDescription = "";
       this.subDescription = "";
       this.thumbnail = "";
