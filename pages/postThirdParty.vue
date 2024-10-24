@@ -5,7 +5,7 @@
       <v-select
         id="tags"
         v-model="selectedType"
-        :items="['PathOfExile', 'WorldOfWarcraft']"
+        :items="['PathOfExile', 'PathOfExile2', 'WorldOfWarcraft']"
       ></v-select>
     </v-container>
 
